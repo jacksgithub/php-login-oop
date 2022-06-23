@@ -1,0 +1,64 @@
+body { background: center / cover fixed url('../imgs/bg1.jpg'); min-height: 100vh; }
+
+#site-title { color: #fff; }
+#site-title-1 { color: rgb(223, 178, 224); }
+#personalization { font-size: 12px; color: #aaa; display: flex; justify-content: space-between; }
+#welcome-date { margin-left: auto; }
+#home h1 { color: #fff; }
+.attribution { display: block; text-align: right; font-style: italic; font-size: 15px;  }
+#upload-img-form { text-align: right; display: flex; }
+#upload-img-form input[type="file"] { border: 1px solid #6c757d; margin-right: 5px; max-width: 100%; flex-grow: 2; height: 100%; }
+
+#profile-container { display: flex; gap: 10px; margin-top: 0px; }
+#profile-img { max-height: 200px; width: auto; }
+#profile-details { display: flex; justify-content: center; flex-direction: column; max-width: 200px; }
+
+.nav-link { color: #fff; }
+.nav-link:hover { color: rgb(225, 171, 226); }
+#home a { color: rgb(210, 159, 211); }
+#home a:hover { color: rgb(223, 178, 224); }
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link { background-color: #fff; color: #6c757d; font-weight: 700; }
+.btn-primary { background-color: rgb(210, 159, 211); border-color: rgb(222, 163, 223); }
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus { background-color: rgb(223, 178, 224); border-color: rgb(225, 171, 226); }
+.show-users-delete .btn-primary:hover, .show-users-delete .btn-primary:active, .show-users-delete .btn-primary:focus { background-color: #dc3545; border-color: #dc3545; }
+.loggedin #form-container { display: none; } /* hide index.php login/signup forms if logged in */
+.hide { display: none; }
+
+
+/* tinymce */
+#mytinymce { height: 100px; }
+#mytinymce-form .tox-tinymce { opacity: 0.8; border-radius: 0px; }
+
+
+/* admin */
+#show-users-container { font-size: 14px; }
+.show-users-row-heading { padding: 5px 7px; border-bottom: 1px solid #000; }
+.show-users-heading { font-weight: bold; text-align: center; }
+.show-users-row { display: flex; flex-direction: row; flex-wrap: wrap; position: relative; }
+.show-users-row:nth-child(even) { background: #fff; }
+.show-users-row > div { display: flex; justify-content: center; align-items: center; padding: 7px; height: 60px; }
+.show-users-row-heading > div { height: initial; }
+.show-users-img { flex-basis: 110px; }
+.show-users-img img { height: 100%; width: auto; }
+.show-users-username { flex-basis: 100px; }
+.show-users-email { flex-basis: 200px; }
+.show-users-row > .show-users-blurb { flex-grow: 2; justify-content: flex-start; overflow: hidden; }
+.show-users-blurb p { margin: 0px; padding: 0px; }
+.show-users-delete a { display: none; color: rgb(223, 178, 224); font-weight: bold; text-decoration: none; font-size: 24px; position: absolute; right: 15px; line-height: 60px; }
+.show-users-row:hover { cursor: pointer; }
+.admin-row:hover { cursor: default; }
+.show-users-row:hover .show-users-delete a { display: inline; }
+.show-users-delete { display: flex; }
+.show-users-delete button { align-self: center; margin-right: 10px; font-size: 12px; }
+/* .show-users-delete a:hover, .show-users-delete a:active { color: red; font-weight: bold; } */
+.admin-row .show-users-delete { display: none; }
+#modal-username { font-style: italic; }
+
+
+@media (max-width: 480px) {
+    .show-users-row-heading { flex-direction: column;  }
+    .show-users-row { margin-bottom: 20px; }
+    #show-users-container .show-users-row-heading > div { height: initial; flex-basis: initial; justify-content: center; }
+    .show-users-row .show-users-email, .show-users-row .show-users-blurb { flex-basis: 100%; height: initial; }
+    .show-users-delete { padding: 10px; flex-basis: 100%; justify-content: center; align-content: center; }
+}
