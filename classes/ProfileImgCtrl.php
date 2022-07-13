@@ -6,17 +6,13 @@ class ProfileImgCtrl extends Profile {
     private $username;
     private $KB = 1024;
     private $MB = 1048576;
-    private $allowedFileTypes = array('jpg', 'jpeg', 'png', 'gif');
+    private $allowedFileTypes = array('image/jpg', 'image/jpeg', 'image/png', 'image/gif');
 
     public function __construct($file) {
         $this->file = $file;
     }
 
     public function addImg() {
-        $fileExtLC = $this->getExtension(); // File extension in lowercase
-        $fileNameNew = uniqid('', true) . '.' . $fileExtLC; // Unique ID based on current microseconds + file extension
-        chdir('../uploads');
-        $fileDestination = getcwd() . '/' . $fileNameNew;
         
         if ($this->isError()) {
             header('Location: ../profile.php?error=uploaderror');
@@ -28,10 +24,17 @@ class ProfileImgCtrl extends Profile {
             exit();
         }
 
-        if ($this->isWrongType($fileExtLC)) {
+        if ($this->isWrongType()) {
             header('Location: ../profile.php?error=filetypeincorrect');
             exit();
         }
+
+        // File extension in lowercase
+        $fileExtLC = $this->getExtension(); 
+        // Unique ID based on current microseconds + file extension; change to uploads dir
+        $fileNameNew = uniqid('', true) . '.' . $fileExtLC; 
+        chdir('../uploads');
+        $fileDestination = getcwd() . '/' . $fileNameNew;
 
         // Move file to correct folder
         move_uploaded_file($this->file['tmp_name'], $fileDestination);
@@ -75,11 +78,16 @@ class ProfileImgCtrl extends Profile {
         }
     }
 
-    private function isWrongType($fileExtLC) {
-        if (!in_array($fileExtLC, $this->allowedFileTypes))
+    private function isWrongType() {
+        $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
+        $filetype = finfo_file($fileinfo, $this->file['tmp_name']);
+
+        if (!in_array($filetype, $this->allowedFileTypes))
         {
-            return true;
+            finfo_close($fileinfo);
+            return false;
         } else {
+            finfo_close($fileinfo);
             return false;
         }
     }
